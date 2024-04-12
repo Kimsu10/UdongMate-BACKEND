@@ -5,21 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class MainTap extends JFrame {
-
     private static final long serialVersionUID = 1L;
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                   MainTap frame = new MainTap();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     public MainTap() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +22,6 @@ public class MainTap extends JFrame {
         JMenuItem courseMenuItem = new JMenuItem("코스");
         JMenuItem crewMenuItem = new JMenuItem("크루");
         JMenuItem boardMenuItem = new JMenuItem("게시판");
-        JMenuItem weatherMenuItem = new JMenuItem("날씨");
 
         // 메뉴 항목의 폰트 설정
         Font menuFont = new Font("Gong Gothic Bold", Font.PLAIN, 25);
@@ -45,24 +30,72 @@ public class MainTap extends JFrame {
         courseMenuItem.setFont(menuFont);
         crewMenuItem.setFont(menuFont);
         boardMenuItem.setFont(menuFont);
-        weatherMenuItem.setFont(menuFont);
 
         // 메뉴 항목의 폰트 색상 설정
         mainPageMenuItem.setForeground(menuItemTextColor);
         courseMenuItem.setForeground(menuItemTextColor);
         crewMenuItem.setForeground(menuItemTextColor);
         boardMenuItem.setForeground(menuItemTextColor);
-        weatherMenuItem.setForeground(menuItemTextColor);
-
-        // 가운데 정렬을 위한 공백 추가
+        
         menuBar.add(Box.createHorizontalGlue());
+
+        // 메뉴 항목의 텍스트 가로 정렬을 가운데로 설정
+        mainPageMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
+        courseMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
+        crewMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
+        boardMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // 메뉴 항목에 ActionListener 추가
+        mainPageMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 코스 창 이동
+                new MainPage().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+
+        courseMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 코스 창 이동
+                new Course().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+
+        crewMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 크루 창 이동
+                new Crew().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+
+        boardMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 게시판 창 이동
+                new Board().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+        
+        
+
 
         // 메뉴 바에 메뉴 항목 추가
         menuBar.add(mainPageMenuItem);
         menuBar.add(courseMenuItem);
         menuBar.add(crewMenuItem);
         menuBar.add(boardMenuItem);
-        menuBar.add(weatherMenuItem);
+
+        // WeatherAppPanel 추가
+        WeatherApp weatherApp = new WeatherApp();
+        WeatherAppPanel weatherAppPanel = new WeatherAppPanel(weatherApp);
+        weatherAppPanel.setPreferredSize(new Dimension(120, 600)); // WeatherAppPanel의 크기 설정
+        menuBar.add(weatherAppPanel);
 
         // myPageMenuItem 버튼 생성 및 설정
         JButton myPageButton = new JButton();
@@ -83,52 +116,6 @@ public class MainTap extends JFrame {
 
         // 메뉴 바에 myPageButton 추가 (오른쪽 정렬)
         menuBar.add(myPageButton);
-
-        // UIManager를 사용하여 메뉴 바의 배경색 변경
-        UIManager.put("MenuBar.background", Color.BLACK);
-        UIManager.put("Menu.background", Color.BLACK);
-        UIManager.put("MenuItem.background", Color.BLACK);
-        SwingUtilities.updateComponentTreeUI(menuBar);
-
-        // 프레임에 메뉴 바 설정
-        setJMenuBar(menuBar);
-        
-        // courseMenuItem에 ActionListener 추가
-        mainPageMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 코스 창 이동
-                new MainPage().setVisible(true);
-                dispose(); // 현재 창 닫기
-            }
-        });
-        // courseMenuItem에 ActionListener 추가
-        courseMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 코스 창 이동
-                new Course().setVisible(true);
-                dispose(); // 현재 창 닫기
-            }
-        });
-        
-        crewMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 코스 창 이동
-                new Crew().setVisible(true);
-                dispose(); // 현재 창 닫기
-            }
-        });
-        
-        boardMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 코스 창 이동
-                new Board().setVisible(true);
-                dispose(); // 현재 창 닫기
-            }
-        });
         
         myPageButton.addActionListener(new ActionListener() {
             @Override
@@ -138,6 +125,27 @@ public class MainTap extends JFrame {
                 dispose(); // 현재 창 닫기
             }
         });
+        
+        // UIManager를 사용하여 메뉴 바의 배경색 변경
+        UIManager.put("MenuBar.background", Color.BLACK);
+        UIManager.put("Menu.background", Color.BLACK);
+        UIManager.put("MenuItem.background", Color.BLACK);
+        SwingUtilities.updateComponentTreeUI(menuBar);
 
+        // 프레임에 메뉴 바 설정
+        setJMenuBar(menuBar);
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MainTap frame = new MainTap();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
