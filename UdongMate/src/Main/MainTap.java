@@ -9,7 +9,7 @@ public class MainTap extends JFrame {
 
     public MainTap() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 800);
+        setSize(1400, 900);
 
         // 메뉴 바 생성
         JMenuBar menuBar = new JMenuBar();
@@ -24,9 +24,10 @@ public class MainTap extends JFrame {
         JMenuItem boardMenuItem = new JMenuItem("게시판");
 
         // 메뉴 항목의 폰트 설정
+        Font menuFont1 = new Font("Gong Gothic Bold", Font.PLAIN, 30);
         Font menuFont = new Font("Gong Gothic Bold", Font.PLAIN, 25);
         Color menuItemTextColor = Color.WHITE; // 흰색으로 설정
-        mainPageMenuItem.setFont(menuFont);
+        mainPageMenuItem.setFont(menuFont1);
         courseMenuItem.setFont(menuFont);
         crewMenuItem.setFont(menuFont);
         boardMenuItem.setFont(menuFont);
