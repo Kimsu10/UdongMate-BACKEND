@@ -92,6 +92,52 @@ public class MainTap extends JFrame {
 
         // 프레임에 메뉴 바 설정
         setJMenuBar(menuBar);
+        
+        // courseMenuItem에 ActionListener 추가
+        mainPageMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 코스 창 이동
+                new MainPage().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+        // courseMenuItem에 ActionListener 추가
+        courseMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 코스 창 이동
+                new Course().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+        
+        crewMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 코스 창 이동
+                new Crew().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+        
+        boardMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 코스 창 이동
+                new Board().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
+        
+        myPageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 코스 창 이동
+                new MyPage().setVisible(true);
+                dispose(); // 현재 창 닫기
+            }
+        });
 
     }
 }
