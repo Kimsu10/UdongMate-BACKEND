@@ -2,9 +2,19 @@ package Main;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.*;
 
+import Jdbc.Jdbc;
+import MyPage.Membership;
+import MyPage.UserManager;
+
 public class MainTap extends JFrame {
+   private static String loggedInUserImage;
     private static final long serialVersionUID = 1L;
 
     public MainTap() {
@@ -103,7 +113,9 @@ public class MainTap extends JFrame {
         myPageButton.setPreferredSize(new Dimension(80, 80)); // 정사각형 크기로 수정
 
         // ImageIcon을 생성하고 이미지 크기 조정
-        ImageIcon myPageIcon = new ImageIcon("img/lim_seoyul.jpg");
+       
+        
+        ImageIcon myPageIcon = new ImageIcon(loggedInUserImage);
         Image img = myPageIcon.getImage();
         Image updateImg = img.getScaledInstance(myPageButton.getPreferredSize().width, myPageButton.getPreferredSize().height, Image.SCALE_SMOOTH);
         ImageIcon updateIcon = new ImageIcon(updateImg);
@@ -122,8 +134,11 @@ public class MainTap extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 코스 창 이동
-                new MyPage().setVisible(true);
+               
+               new MyPage().setVisible(true);
                 dispose(); // 현재 창 닫기
+               
+
             }
         });
         
@@ -137,6 +152,11 @@ public class MainTap extends JFrame {
         setJMenuBar(menuBar);
     }
 
+    public static void setLoggedInUserImage(String userImage) {
+        loggedInUserImage = userImage;
+    }
+    
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
