@@ -9,10 +9,10 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
-import Jdbc.Jdbc;
+import JDBC.Jdbc;
 import Main.MainPage;
 import Main.MainTap;
-import Main.MyPage;
+import MyPage.MyPage;
 
 public class Login extends JFrame {
 
