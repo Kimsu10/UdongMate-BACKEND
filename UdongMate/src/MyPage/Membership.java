@@ -1,26 +1,10 @@
 package MyPage;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.*;
+import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
 import JDBC.Jdbc;
@@ -73,6 +57,7 @@ public class Membership extends JFrame {
         add(idField);
 
         checkDuplicateButton = new JButton("중복체크"); //중복체크 버튼 설정
+        checkDuplicateButton.setBackground(Color.white);
         checkDuplicateButton.setBounds(200, 51, 75, 23);
         Font buttonFont = checkDuplicateButton.getFont();
         checkDuplicateButton.setFont(buttonFont.deriveFont(Font.PLAIN, 10)); //폰트 크기 조정
@@ -155,6 +140,7 @@ public class Membership extends JFrame {
         add(addressDropdown);
 
         JButton registerButton = new JButton("가입하기");
+        registerButton.setBackground(Color.white);
         registerButton.setBounds(100, 290, 100, 25);
 
         registerButton.addActionListener(new ActionListener() {

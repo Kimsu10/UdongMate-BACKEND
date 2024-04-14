@@ -1,19 +1,16 @@
 package MyPage;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.*;
+import java.awt.geom.*;
+import java.awt.image.*;
+import java.sql.*;
 
-import JDBC.Jdbc;
-import Main.MainTap;
+import javax.swing.*;
+import javax.swing.border.*;
+
+import JDBC.*;
+import Main.*;
 
 public class MyPage extends MainTap {
    private static int loggedInUserNo;
@@ -165,6 +162,32 @@ public class MyPage extends MainTap {
       } catch (SQLException e) {
          e.printStackTrace();
       }
+      
+      // 로그아웃 버튼 생성
+      JButton logoutButton = new JButton("로그아웃");
+      logoutButton.setFont(new Font("Gong Gothic Light", Font.PLAIN, 20));
+      logoutButton.setBackground(Color.WHITE); // 배경색을 흰색으로 설정
+      logoutButton.setBorder(null); // 테두리 없애기
+      logoutButton.setContentAreaFilled(false); // 내용 영역 채우기 없애기
+
+      // 로그아웃 버튼 가운데 정렬을 위해 JPanel을 사용
+      JPanel buttonPanel = new JPanel(new BorderLayout());
+      buttonPanel.setBackground(Color.WHITE); // 배경색을 흰색으로 설정
+      buttonPanel.add(logoutButton, BorderLayout.CENTER);
+      
+      // 로그아웃 버튼에 액션 리스너 추가
+      logoutButton.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              // 현재 MyPage 프레임 닫기
+              dispose();
+              // 로그인 창 열기
+              new Login().setVisible(true);
+          }
+      });
+      
+      // 로그아웃 패널을 leftPanel의 아래쪽에 추가
+      leftPanel.add(buttonPanel, BorderLayout.SOUTH);
    }
 
    public static void setLoggedInUserNo(int userNo) {

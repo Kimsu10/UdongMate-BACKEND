@@ -2,7 +2,10 @@ package MyPage;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -10,7 +13,7 @@ import JDBC.Jdbc;
 import Main.CrewMake;
 import Main.MainPage;
 import Main.MainTap;
-import MyPage.MyPage;
+
 
 public class Login extends JFrame {
 
@@ -65,11 +68,13 @@ public class Login extends JFrame {
       getContentPane().add(pwField);
 
       JButton regButton = new JButton("회원가입");
+      regButton.setBackground(Color.white);
       regButton.setFont(font); // 폰트 적용
       regButton.setBounds(107, 199, 120, 30);
       getContentPane().add(regButton);
 
       JButton loginButton = new JButton("로그인");
+      loginButton.setBackground(Color.white);
       loginButton.setFont(font); // 폰트 적용
       loginButton.setBounds(252, 199, 120, 30);
       getContentPane().add(loginButton);
