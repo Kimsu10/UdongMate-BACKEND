@@ -1,5 +1,4 @@
 package Main;
-
 import java.awt.*;
 import java.sql.*;
 
@@ -7,7 +6,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 
-import Jdbc.*;
+import JDBC.*;
 
 public class Mountain extends MainTap {
     private JPanel contentPane;
@@ -43,7 +42,7 @@ public class Mountain extends MainTap {
              Connection con = Jdbc.get();
 
              // SQL 쿼리
-             String sql = "SELECT mountain.mt_name, mountain.mt_dist, address.addr_name, mountain.lev_no FROM mountain JOIN address ON mountain.addr_no = address.addr_no";
+             String sql = "SELECT mountain.mt_name, mountain.mt_dist, address.addr_name, mountain.lev_no FROM mountain JOIN address ON mountain.addr_no = address.addr_no ORDER BY mt_dist ASC";
              PreparedStatement pstmt = con.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery();
 
@@ -52,7 +51,7 @@ public class Mountain extends MainTap {
                  String mtName = rs.getString("mt_name");
                  String addrName = rs.getString("addr_name");
                  int levNo = rs.getInt("lev_no");
-                 int mtDist = rs.getInt("mt_dist");
+                 Double mtDist = rs.getDouble("mt_dist");
                  double Number = Math.round(mtDist * 10) / 10.0;
                  // 레벨 번호에 따라 문자열을 설정
                  String level;
@@ -83,8 +82,13 @@ public class Mountain extends MainTap {
 
 
         // 테이블 생성
-        JTable table = new JTable(model);
-
+        JTable table = new JTable(model) {
+           @Override
+           public boolean isCellEditable(int row, int column){
+               return false;
+            }
+        };
+        
         Font cellFont = new Font("Gong Gothic Light", Font.PLAIN, 20);
         table.setFont(cellFont);
         table.setRowHeight(30);

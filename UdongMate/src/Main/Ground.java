@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 
-import Jdbc.*;
+import JDBC.*;
 
 public class Ground extends MainTap {
     private JPanel contentPane;
@@ -33,7 +33,7 @@ public class Ground extends MainTap {
         contentPane.setLayout(new BorderLayout(0, 10)); // 수직 간격 10으로 설정
 
         // 열 이름 정의
-        String[] columnNames = {"산책/러닝", "코스 길이", "지역", "난이도", "자전거", "애견동반"};
+        String[] columnNames = {"산책/러닝", "코스 길이", "지역", "난이도", "자전거", "반려견 가능"};
 
         // 테이블 모델 생성
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
@@ -42,7 +42,7 @@ public class Ground extends MainTap {
             Connection con = Jdbc.get();
 
             // SQL 쿼리
-            String sql = "SELECT ground.gr_name, ground.gr_dist, address.addr_name, ground.lev_no, ground.gr_cycleok, ground.gr_dogok, ground.gr_img, ground.gr_info FROM ground JOIN address ON ground.addr_no = address.addr_no";
+            String sql = "SELECT ground.gr_name, ground.gr_dist, address.addr_name, ground.lev_no, ground.gr_cycleok, ground.gr_dogok, ground.gr_img, ground.gr_info FROM ground JOIN address ON ground.addr_no = address.addr_no ORDER BY gr_dist ASC";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 
@@ -51,7 +51,7 @@ public class Ground extends MainTap {
                 String grName = rs.getString("gr_name");
                 String addrName = rs.getString("addr_name");
                 int levNo = rs.getInt("lev_no");
-                int grDist = rs.getInt("gr_dist");
+                double grDist = rs.getDouble("gr_dist");
                 int cycleOK_num = rs.getInt("gr_cycleok");
                 int dogOK_num = rs.getInt("gr_dogok");
                 double Number = Math.round(grDist * 10) / 10.0;
@@ -110,8 +110,13 @@ public class Ground extends MainTap {
         }
 
         // 테이블 생성
-        JTable table = new JTable(model);
-
+        JTable table = new JTable(model) {
+           @Override
+           public boolean isCellEditable(int row, int column){
+               return false;
+            }
+        };
+        
         Font cellFont = new Font("Gong Gothic Light", Font.PLAIN, 20);
         table.setFont(cellFont);
         table.setRowHeight(30);
