@@ -2,14 +2,12 @@ package MyPage;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import javax.swing.*;
 
 import JDBC.Jdbc;
+import Main.CrewMake;
 import Main.MainPage;
 import Main.MainTap;
 import MyPage.MyPage;
@@ -136,6 +134,7 @@ public class Login extends JFrame {
                UserManager.setUserImage(loggedInUserNo, userImg); // 사용자 이미지 설정
                MainTap.setLoggedInUserImage(userImg); // MainTap 클래스에 사용자 이미지 설정
                MyPage.setLoggedInUserNo(loggedInUserNo); // MainTap 클래스에 사용자 설정
+               CrewMake.setLoggedInUserNo(loggedInUserNo); // MainTap 클래스에 사용자 설정
 
             } else if (rs.getInt("result") == 1) {
                System.out.println("비번틀림");
