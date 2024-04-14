@@ -27,7 +27,7 @@ public class Ground extends MainTap {
 
     public Ground() {
         super();
-
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(100, 100, 100, 100)); // 여백 추가
         contentPane.setLayout(new BorderLayout(0, 10)); // 수직 간격 10으로 설정
