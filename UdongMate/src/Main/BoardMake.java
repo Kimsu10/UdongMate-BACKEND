@@ -1,30 +1,17 @@
 package Main;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.sql.Timestamp;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
 import java.util.Iterator;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
 import JDBC.Jdbc;
 
 public class BoardMake extends JFrame {
+
    private static int loggedInUserNo;
    private JComboBox<String> boTypeDropdown;
    private JTextArea contentArea;
@@ -109,21 +96,9 @@ public class BoardMake extends JFrame {
             String boTitle = titleField.getText();
             String boContent = contentArea.getText();
             String boType = (String) boTypeDropdown.getSelectedItem();
-            Integer boTypeno;
-            
-            switch (boType) {
-            case "홍보글":
-               boTypeno = 1;
-                break;
-            case "잡담":
-               boTypeno = 2;
-                break;
-            default:
-               boTypeno = 0;
-            }
+            int boTypeno = boType.equals("홍보글") ? 1 : 2;
             // 게시글 정보를 crew 테이블에 삽입하기 위한 INSERT 쿼리 작성
-            String query = "INSERT INTO board (board_title, board_cont, board_type, user_no) values (?, ?, ?, ?)";
-
+            String query = "CALL createBoard(?, ?, ?, ?);";
             try (
                   Connection con = Jdbc.get(); 
                   PreparedStatement psmt = con.prepareStatement(query)) {
@@ -133,7 +108,7 @@ public class BoardMake extends JFrame {
                psmt.setString(2, boContent);
                psmt.setInt(3, boTypeno);
                psmt.setInt(4, loggedInUserNo);
-
+               
                // 쿼리 실행
                int rowsInserted = psmt.executeUpdate();
                
