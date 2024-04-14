@@ -26,11 +26,31 @@ public class Board extends MainTap {
 
     public Board() {
         super();
-        setLocationRelativeTo(null);
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(100, 100, 100, 100)); // 여백 추가
-        contentPane.setLayout(new BorderLayout(0, 10)); // 수직 간격 10으로 설정
+        contentPane.setBorder(new EmptyBorder(100, 100, 100, 100));
+        contentPane.setLayout(new BorderLayout(0, 10));
 
+        // 버튼을 포함할 패널 생성
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        // 버튼 생성
+        JButton button = new JButton("새 글 작성");
+        button.setFont(new Font("Gong Gothic Light", Font.PLAIN, 20));
+        button.setBackground(Color.WHITE);
+        buttonPanel.add(button); // 버튼을 패널에 추가
+
+        button.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+              // 코스 창 이동
+              new BoardMake().setVisible(true);
+              
+           }
+        });
+
+        // 테이블 위에 버튼 패널을 추가
+        contentPane.add(buttonPanel, BorderLayout.NORTH);
+        
         // 열 이름 정의
         String[] columnNames = {"제목", "종류", "작성일자", "작성자명"};
 
