@@ -4,9 +4,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.Iterator;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.table.*;
 
 import JDBC.*;
@@ -39,7 +41,7 @@ public class Ground extends MainTap {
         contentPane.setLayout(new BorderLayout(0, 10)); // 수직 간격 10으로 설정
 
         // Create JPanel for checkboxes
-        JPanel dropPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 80, 10)); // FlowLayout의 정렬 방식을 LEADING으로 설정
+        JPanel dropPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 60, 10)); // FlowLayout의 정렬 방식을 LEADING으로 설정
 
         JPanel addrPanel = new JPanel(new FlowLayout(FlowLayout.LEADING)); // FlowLayout의 정렬 방식을 LEADING으로 설정
         JLabel addrLabel = new JLabel("지역");
@@ -48,6 +50,7 @@ public class Ground extends MainTap {
                 "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구",
                 "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"};
         addrDropdown = new JComboBox<>(addr);
+        addrDropdown.setFont(new Font("Gong Gothic Light", Font.PLAIN, 15));
         addrPanel.add(addrDropdown);
 
         JPanel levPanel = new JPanel(new FlowLayout(FlowLayout.LEADING)); // FlowLayout의 정렬 방식을 LEADING으로 설정
@@ -55,6 +58,7 @@ public class Ground extends MainTap {
         levPanel.add(levLabel);
         String lev[] = {"선택안함", "하", "중", "상"};
         levDropdown = new JComboBox<>(lev);
+        levDropdown.setFont(new Font("Gong Gothic Light", Font.PLAIN, 16));
         levPanel.add(levDropdown);
 
         JPanel cyclePanel = new JPanel(new FlowLayout(FlowLayout.LEADING)); // FlowLayout의 정렬 방식을 LEADING으로 설정
@@ -62,6 +66,7 @@ public class Ground extends MainTap {
         cyclePanel.add(cycleLabel);
         String cycle[] = {"선택안함", "가능", "일부분 가능", "불가능"};
         cycleDropdown = new JComboBox<>(cycle);
+        cycleDropdown.setFont(new Font("Gong Gothic Light", Font.PLAIN, 16));
         cyclePanel.add(cycleDropdown);
 
         JPanel dogPanel = new JPanel(new FlowLayout(FlowLayout.LEADING)); // FlowLayout의 정렬 방식을 LEADING으로 설정
@@ -69,6 +74,7 @@ public class Ground extends MainTap {
         dogPanel.add(dogLabel);
         String dog[] = {"선택안함", "가능", "불가능"};
         dogDropdown = new JComboBox<>(dog);
+        dogDropdown.setFont(new Font("Gong Gothic Light", Font.PLAIN, 16));
         dogPanel.add(dogDropdown);
 
         dropPanel.add(addrPanel);
@@ -79,9 +85,40 @@ public class Ground extends MainTap {
         JButton searchButton = new JButton("검색");
         searchButton.setPreferredSize(new Dimension(70, 30)); // 버튼 크기 설정
         dropPanel.add(searchButton); // 버튼 추가
+        searchButton.setFont(new Font("Gong Gothic Light", Font.PLAIN, 19));
+        searchButton.setBackground(Color.white);
 
         JScrollPane checkBoxScrollPane = new JScrollPane(dropPanel);
         contentPane.add(checkBoxScrollPane, BorderLayout.NORTH);
+
+        Font cellFont2 = new Font("Gong Gothic Light", Font.PLAIN, 19);
+
+
+        for (Component comp : addrPanel.getComponents()) {
+            if (comp instanceof JLabel) {
+                ((JLabel) comp).setFont(cellFont2);
+            }
+        }
+
+
+        for (Component comp : levPanel.getComponents()) {
+            if (comp instanceof JLabel) {
+                ((JLabel) comp).setFont(cellFont2);
+            }
+        }
+
+        for (Component comp : cyclePanel.getComponents()) {
+            if (comp instanceof JLabel) {
+                ((JLabel) comp).setFont(cellFont2);
+            }
+        }
+
+        for (Component comp : dogPanel.getComponents()) {
+            if (comp instanceof JLabel) {
+                ((JLabel) comp).setFont(cellFont2);
+            }
+        }
+        
 
         // 열 이름 정의
         String[] columnNames = {"산책/러닝", "코스 길이", "지역", "난이도", "자전거", "반려견 가능"};
@@ -320,18 +357,19 @@ public class Ground extends MainTap {
                 return false;
             }
         };
+        
         table.getColumnModel().getColumn(0).setPreferredWidth(200); 
         table.getColumnModel().getColumn(1).setPreferredWidth(90); 
         table.getColumnModel().getColumn(2).setPreferredWidth(90); 
         table.getColumnModel().getColumn(3).setPreferredWidth(70); 
         table.getColumnModel().getColumn(4).setPreferredWidth(70); 
-        table.getColumnModel().getColumn(5).setPreferredWidth(70); 
-        
+        table.getColumnModel().getColumn(5).setPreferredWidth(70);
+
         Font cellFont = new Font("Gong Gothic Light", Font.PLAIN, 20);
         table.setFont(cellFont);
         table.setRowHeight(30);
 
-        TableCellRenderer headerRendereㅓr = table.getTableHeader().getDefaultRenderer();
+        TableCellRenderer headerRenderer = table.getTableHeader().getDefaultRenderer();
         table.getTableHeader().setFont(new Font("Gong Gothic Light", Font.PLAIN, 30));
         table.getTableHeader().setBackground(Color.gray);
 
