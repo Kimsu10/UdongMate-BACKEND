@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
-import Jdbc.Jdbc;
+import JDBC.Jdbc;
 import MyPage.Membership;
 import MyPage.UserManager;
 
@@ -18,6 +18,7 @@ public class MainTap extends JFrame {
     private static final long serialVersionUID = 1L;
 
     public MainTap() {
+       setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1400, 900);
 
@@ -32,6 +33,7 @@ public class MainTap extends JFrame {
         JMenuItem courseMenuItem = new JMenuItem("코스");
         JMenuItem crewMenuItem = new JMenuItem("크루");
         JMenuItem boardMenuItem = new JMenuItem("게시판");
+        
 
         // 메뉴 항목의 폰트 설정
         Font menuFont1 = new Font("Gong Gothic Bold", Font.PLAIN, 30);
@@ -41,6 +43,7 @@ public class MainTap extends JFrame {
         courseMenuItem.setFont(menuFont);
         crewMenuItem.setFont(menuFont);
         boardMenuItem.setFont(menuFont);
+        
 
         // 메뉴 항목의 폰트 색상 설정
         mainPageMenuItem.setForeground(menuItemTextColor);
@@ -55,6 +58,7 @@ public class MainTap extends JFrame {
         courseMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
         crewMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
         boardMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
+        
 
         // 메뉴 항목에 ActionListener 추가
         mainPageMenuItem.addActionListener(new ActionListener() {
@@ -83,25 +87,22 @@ public class MainTap extends JFrame {
                 dispose(); // 현재 창 닫기
             }
         });
-
+        
         boardMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 게시판 창 이동
+                // 크루 창 이동
                 new Board().setVisible(true);
                 dispose(); // 현재 창 닫기
             }
         });
-        
-        
-
 
         // 메뉴 바에 메뉴 항목 추가
         menuBar.add(mainPageMenuItem);
         menuBar.add(courseMenuItem);
         menuBar.add(crewMenuItem);
         menuBar.add(boardMenuItem);
-
+        
         // WeatherAppPanel 추가
         WeatherApp weatherApp = new WeatherApp();
         WeatherAppPanel weatherAppPanel = new WeatherAppPanel(weatherApp);
