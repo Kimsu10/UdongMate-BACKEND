@@ -9,8 +9,9 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
-import JDBC.Jdbc;
+import Jdbc.*;
 import MyPage.Membership;
+import MyPage.MyPage;
 import MyPage.UserManager;
 
 public class MainTap extends JFrame {

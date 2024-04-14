@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 
-import JDBC.*;
+import Jdbc.*;
 
 public class Mountain extends MainTap {
     private JPanel contentPane;

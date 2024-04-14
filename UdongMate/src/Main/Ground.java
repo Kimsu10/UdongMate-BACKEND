@@ -11,7 +11,7 @@ import javax.swing.border.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.*;
 
-import JDBC.*;
+import Jdbc.*;
 
 public class Ground extends MainTap {
     private JPanel contentPane;

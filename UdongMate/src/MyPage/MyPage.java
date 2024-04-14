@@ -9,7 +9,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import JDBC.*;
+import Jdbc.*;
 import Main.*;
 
 public class MyPage extends MainTap {

@@ -1,4 +1,5 @@
 package Main;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -8,6 +9,7 @@ import javax.swing.border.*;
 import javax.swing.table.*;
 
 import JDBC.*;
+import Jdbc.Jdbc;
 
 public class Board extends MainTap {
     private JPanel contentPane;

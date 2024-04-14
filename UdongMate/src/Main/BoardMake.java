@@ -1,6 +1,7 @@
 package Main;
 
 import java.awt.*;
+import Jdbc.Jdbc;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.Iterator;
@@ -8,7 +9,7 @@ import java.util.Iterator;
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
-import JDBC.Jdbc;
+import Jdbc.*;
 
 public class BoardMake extends JFrame {
 
