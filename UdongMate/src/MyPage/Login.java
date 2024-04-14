@@ -2,14 +2,12 @@ package MyPage;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import javax.swing.*;
 
 import JDBC.Jdbc;
+import Main.BoardMake;
 import Main.CrewMake;
 import Main.MainPage;
 import Main.MainTap;
@@ -19,7 +17,7 @@ public class Login extends JFrame {
 
    private JTextField idField;
    private JPasswordField pwField;
-   private int loggedInUserNo;
+   private int loggedInUserNo;                            
 
    public static void main(String[] args) {
       EventQueue.invokeLater(new Runnable() {
@@ -33,7 +31,7 @@ public class Login extends JFrame {
          }
       });
    }
-
+       
    public Login() {
 
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,13 +66,11 @@ public class Login extends JFrame {
       getContentPane().add(pwField);
 
       JButton regButton = new JButton("회원가입");
-      regButton.setBackground(Color.white);
       regButton.setFont(font); // 폰트 적용
       regButton.setBounds(107, 199, 120, 30);
       getContentPane().add(regButton);
 
       JButton loginButton = new JButton("로그인");
-      loginButton.setBackground(Color.white);
       loginButton.setFont(font); // 폰트 적용
       loginButton.setBounds(252, 199, 120, 30);
       getContentPane().add(loginButton);
@@ -140,7 +136,7 @@ public class Login extends JFrame {
                MainTap.setLoggedInUserImage(userImg); // MainTap 클래스에 사용자 이미지 설정
                MyPage.setLoggedInUserNo(loggedInUserNo); // MainTap 클래스에 사용자 설정
                CrewMake.setLoggedInUserNo(loggedInUserNo); // MainTap 클래스에 사용자 설정
-
+               BoardMake.setLoggedInUserNo(loggedInUserNo); //BoardMake 클래스에 사용자 설정
             } else if (rs.getInt("result") == 1) {
                System.out.println("비번틀림");
                a = 1;
