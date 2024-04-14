@@ -1,5 +1,6 @@
 package Main;
 import java.awt.*;
+import java.awt.event.*;
 import java.sql.*;
 
 import javax.swing.*;
@@ -102,7 +103,11 @@ public class Board extends MainTap {
                return false;
             }
         };
-        
+        table.getColumnModel().getColumn(0).setPreferredWidth(300); 
+        table.getColumnModel().getColumn(1).setPreferredWidth(100); 
+        table.getColumnModel().getColumn(2).setPreferredWidth(100); 
+        table.getColumnModel().getColumn(3).setPreferredWidth(100); 
+       
         Font cellFont = new Font("Gong Gothic Light", Font.PLAIN, 20);
         table.setFont(cellFont);
         table.setRowHeight(30);

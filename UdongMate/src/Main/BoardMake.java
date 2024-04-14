@@ -26,7 +26,7 @@ public class BoardMake extends JFrame {
       
       System.out.println(loggedInUserNo);
 
-      Font font = new Font("Gong Gothic bold", Font.PLAIN, 12); // 폰트 생성
+      Font font = new Font("Gong Gothic Bold", Font.PLAIN, 15); // 폰트 생성
       Iterator<Object> keysIterator = UIManager.getDefaults().keySet().iterator(); // 모든 컴포넌트에 폰트 적용
       while (keysIterator.hasNext()) {
          Object key = keysIterator.next();
@@ -42,9 +42,8 @@ public class BoardMake extends JFrame {
       add(nameLabel);
 
       JTextField titleField = new JTextField();
-      titleField.setBounds(69, 20, 94, 25);
+      titleField.setBounds(69, 20, 380, 25);
       add(titleField);
-
       JLabel contentLabel = new JLabel("내용: ");
       contentLabel.setBounds(10, 50, 80, 25);
       add(contentLabel);
@@ -73,21 +72,22 @@ public class BoardMake extends JFrame {
          }
      });
 
-      contentArea.setBounds(69, 50, 174, 73);
+      contentArea.setBounds(69, 50, 400, 250);
       add(contentArea);
       contentArea.setLineWrap(true); // 자동 줄 바꿈 설정
 
       JLabel boTypeLabel = new JLabel("글 종류: ");
-      boTypeLabel.setBounds(10, 130, 80, 25);
+      boTypeLabel.setBounds(10, 310, 80, 25);
       add(boTypeLabel);
 
       String[] boTypes = {"홍보글", "잡담"};
       boTypeDropdown = new JComboBox<>(boTypes);
-      boTypeDropdown.setBounds(69, 130, 176, 25);
+      boTypeDropdown.setBounds(69, 310, 176, 25);
       add(boTypeDropdown);
 
       JButton registerButton = new JButton("게시글 등록하기");
-      registerButton.setBounds(99, 171, 100, 25);
+      registerButton.setBounds(180, 350, 200, 25);
+      registerButton.setBackground(Color.white);
 
       registerButton.addActionListener(new ActionListener() {
          @Override
