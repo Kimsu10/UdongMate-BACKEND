@@ -1,8 +1,6 @@
 package Main;
-
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -25,7 +23,7 @@ public class Course extends MainTap {
 
     public Course() {
         super();
-        
+        setLocationRelativeTo(null);
         // contentPanel 초기화
         contentPanel = new JPanel(new BorderLayout());
         getContentPane().add(contentPanel, BorderLayout.CENTER); // contentPanel을 MainTap의 컨텐트 패널에 추가

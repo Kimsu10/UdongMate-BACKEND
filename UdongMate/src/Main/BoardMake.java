@@ -1,15 +1,13 @@
 package Main;
 
 import java.awt.*;
-import Jdbc.Jdbc;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.Iterator;
-
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
-import Jdbc.*;
+import Jdbc.Jdbc;
 
 public class BoardMake extends JFrame {
 
@@ -59,16 +57,16 @@ public class BoardMake extends JFrame {
        @Override
          public void focusGained(FocusEvent e) {
              if (contentArea.getText().equals("새 글을 작성해 주세요!")) {
-                contentArea.setText("");
-                contentArea.setForeground(Color.BLACK); // 힌트 텍스트의 색상을 검은색으로 변경
+            	 contentArea.setText("");
+            	 contentArea.setForeground(Color.BLACK); // 힌트 텍스트의 색상을 검은색으로 변경
              }
          }
 
          @Override
          public void focusLost(FocusEvent e) {
              if (contentArea.getText().isEmpty()) {
-                contentArea.setText("새 글을 작성해 주세요!");
-                contentArea.setForeground(Color.GRAY); // 힌트 텍스트의 색상을 회색으로 변경
+            	 contentArea.setText("새 글을 작성해 주세요!");
+            	 contentArea.setForeground(Color.GRAY); // 힌트 텍스트의 색상을 회색으로 변경
              }
          }
      });
@@ -137,7 +135,7 @@ public class BoardMake extends JFrame {
 
    public static void main(String[] args) {
       // 크루를 생성한 사용자의 user_no를 인자로 전달하여 CrewMake 객체 생성
-     
+	  
       new BoardMake();
    }
 }
