@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
@@ -45,26 +44,31 @@ public class Mountain extends MainTap {
          try {
              Connection con = Jdbc.get();
              
-             JPanel dropPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 210, 10)); // FlowLayout의 정렬 방식을 LEADING으로 설정
+             JPanel dropPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 200, 10)); // FlowLayout의 정렬 방식을 LEADING으로 설정
 
              JPanel addrPanel = new JPanel(new FlowLayout(FlowLayout.LEADING)); // FlowLayout의 정렬 방식을 LEADING으로 설정
              JLabel addrLabel = new JLabel("지역");
+             addrLabel.setFont(new Font("Gong Gothic Light", Font.PLAIN, 16));
              addrPanel.add(addrLabel);
              String addr[] = {"선택안함", "종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구",
                      "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구",
                      "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"};
              addrDropdown = new JComboBox<>(addr);
              addrPanel.add(addrDropdown);
+             addrDropdown.setFont(new Font("Gong Gothic Light", Font.PLAIN, 16));
 
              JPanel levPanel = new JPanel(new FlowLayout(FlowLayout.LEADING)); // FlowLayout의 정렬 방식을 LEADING으로 설정
              JLabel levLabel = new JLabel("난이도");
+             levLabel.setFont(new Font("Gong Gothic Light", Font.PLAIN, 16));
              levPanel.add(levLabel);
              String lev[] = {"선택안함", "하", "중", "상"};
              levDropdown = new JComboBox<>(lev);
              levPanel.add(levDropdown);
+             levDropdown.setFont(new Font("Gong Gothic Light", Font.PLAIN, 16));
 
              JButton searchButton = new JButton("검색");
              searchButton.setPreferredSize(new Dimension(70, 30)); // 버튼 크기 설정
+             searchButton.setFont(new Font("Gong Gothic Light", Font.PLAIN, 19));
 
              dropPanel.add(addrPanel);
              dropPanel.add(levPanel);
@@ -149,7 +153,7 @@ public class Mountain extends MainTap {
                             String mtName = rs.getString("mt_name");
                              String addrName = rs.getString("addr_name");
                              int levNo = rs.getInt("lev_no");
-                             int mtDist = rs.getInt("mt_dist");
+                             double mtDist = rs.getDouble("mt_dist");
                              double distance = Math.round(mtDist * 10) / 10.0;
 
                              // 레벨 번호에 따라 문자열 설정
@@ -191,7 +195,7 @@ public class Mountain extends MainTap {
 
              
              // SQL 쿼리
-             String sql = "SELECT * FROM mountain JOIN address ON mountain.addr_no = address.addr_no";
+             String sql = "SELECT * FROM mountain JOIN address ON mountain.addr_no = address.addr_no ORDER BY mt_dist asc";
              PreparedStatement pstmt = con.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery();
 
@@ -200,7 +204,7 @@ public class Mountain extends MainTap {
                  String mtName = rs.getString("mt_name");
                  String addrName = rs.getString("addr_name");
                  int levNo = rs.getInt("lev_no");
-                 int mtDist = rs.getInt("mt_dist");
+                 double mtDist = rs.getDouble("mt_dist");
                  double Number = Math.round(mtDist * 10) / 10.0;
                  // 레벨 번호에 따라 문자열을 설정
                  String level;
@@ -249,6 +253,11 @@ public class Mountain extends MainTap {
         setContentPane(contentPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
+        table.getColumnModel().getColumn(0).setPreferredWidth(300); 
+        table.getColumnModel().getColumn(1).setPreferredWidth(100); 
+        table.getColumnModel().getColumn(2).setPreferredWidth(100); 
+        table.getColumnModel().getColumn(3).setPreferredWidth(100); 
 
         // 테이블에 마우스 리스너 추가
         table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -287,7 +296,7 @@ public class Mountain extends MainTap {
                 String mtName = rs.getString("mt_name");
                 String addrName = rs.getString("addr_name");
                 int levNo = rs.getInt("lev_no");
-                int mtDist = rs.getInt("mt_dist");
+                double mtDist = rs.getDouble("mt_dist");
                 String mtImg = rs.getString("mt_img");
                 String mtInfo = rs.getString("mt_info");
                 double distance = Math.round(mtDist * 10) / 10.0;
