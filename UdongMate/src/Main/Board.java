@@ -1,13 +1,13 @@
 package Main;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 
-import JDBC.*;
+import Jdbc.*;
 
 public class Board extends MainTap {
     private JPanel contentPane;
@@ -16,7 +16,7 @@ public class Board extends MainTap {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                   Board frame = new Board();
+                	Board frame = new Board();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -28,7 +28,7 @@ public class Board extends MainTap {
     public Board() {
         super();
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(100, 100, 100, 100));
+        contentPane.setBorder(new EmptyBorder(50, 100, 100, 100));
         contentPane.setLayout(new BorderLayout(0, 10));
 
         // 버튼을 포함할 패널 생성
@@ -76,13 +76,13 @@ public class Board extends MainTap {
                 String boType = "";
                 switch (boTypeno) {
                     case 1:
-                       boType = "홍보글";
+                    	boType = "홍보글";
                         break;
                     case 2:
-                       boType = "잡담";
+                    	boType = "잡담";
                         break;
                     default:
-                       boType = "알 수 없음";
+                    	boType = "알 수 없음";
                 }
 
                 // 데이터베이스에서 가져온 값을 테이블 모델에 추가
@@ -103,11 +103,12 @@ public class Board extends MainTap {
                return false;
             }
         };
+        
         table.getColumnModel().getColumn(0).setPreferredWidth(300); 
         table.getColumnModel().getColumn(1).setPreferredWidth(100); 
         table.getColumnModel().getColumn(2).setPreferredWidth(100); 
-        table.getColumnModel().getColumn(3).setPreferredWidth(100); 
-       
+        table.getColumnModel().getColumn(3).setPreferredWidth(100);
+        
         Font cellFont = new Font("Gong Gothic Light", Font.PLAIN, 20);
         table.setFont(cellFont);
         table.setRowHeight(30);
@@ -168,13 +169,13 @@ public class Board extends MainTap {
                 String boType = "";
                 switch (boTypeno) {
                     case 1:
-                       boType = "홍보글";
+                    	boType = "홍보글";
                         break;
                     case 2:
-                       boType = "잡담";
+                    	boType = "잡담";
                         break;
                     default:
-                       boType = "알 수 없음";
+                    	boType = "알 수 없음";
                 }
                 
                 JPanel infoPanel = new JPanel(new BorderLayout());

@@ -1,4 +1,4 @@
-package JDBC;
+package Jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,9 +9,9 @@ public class Jdbc {
       Connection con = null;
       
       try {
-         String id = "당시의 계정";
-         String pw = "당신의 비밀번호";
-         String url = "jdbc:mysql://localhost:3306/당신의 데이터베이스 명";
+         String id = "DB계정";
+         String pw = "비밀번호";
+         String url = "jdbc:mysql://175.209.41.173:3306/DB아룸";
          
          Class.forName("com.mysql.cj.jdbc.Driver");
          // Class 클래스로 mysql 드라이버를 로딩하는 코드 -> DriverManager 등록됨

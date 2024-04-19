@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
-import JDBC.Jdbc;
+import Jdbc.*;
 
 public class Membership extends JFrame {
 

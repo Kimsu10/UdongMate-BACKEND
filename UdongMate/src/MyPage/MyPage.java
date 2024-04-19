@@ -5,11 +5,10 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.*;
 import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.border.*;
 
-import JDBC.*;
+import Jdbc.*;
 import Main.*;
 
 public class MyPage extends MainTap {
