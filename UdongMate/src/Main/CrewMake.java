@@ -29,7 +29,6 @@ public class CrewMake extends JFrame {
 	      addressMap = new HashMap<>();
 	      populateAddressMap();
 	      
-	      System.out.println(loggedInUserNo);
 
 	      Font font = new Font("Gong Gothic bold", Font.PLAIN, 12); // 폰트 생성
 	      Iterator<Object> keysIterator = UIManager.getDefaults().keySet().iterator(); // 모든 컴포넌트에 폰트 적용

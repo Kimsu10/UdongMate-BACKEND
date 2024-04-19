@@ -117,106 +117,106 @@ public class Crew extends MainTap {
 	   }
 
 	   private void displayGroundDetails(String crewName) { //크루정보 팝업창
-		    JFrame frame = new JFrame(crewName);
-		    frame.setSize(400, 250);
-		    frame.setLocationRelativeTo(null);
-		    frame.getContentPane().setBackground(Color.WHITE); // 배경색 흰색으로 설정
+	       JFrame frame = new JFrame(crewName);
+	       frame.setSize(400, 250);
+	       frame.setLocationRelativeTo(null);
+	       frame.getContentPane().setBackground(Color.WHITE); // 배경색 흰색으로 설정
 
-		    JPanel detailsPanel = new JPanel(new BorderLayout());
-		    detailsPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
+	       JPanel detailsPanel = new JPanel(new BorderLayout());
+	       detailsPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
 
-		    try {
-		        Connection con = Jdbc.get();
-		        
-		        String sql = "SELECT crew.crew_no, crew_name, crew_intro, addr_name, user_nick, user_phone FROM user, user_crew, crew, address WHERE user.user_no=user_crew.user_no AND user_crew.crew_no=crew.crew_no AND address.addr_no=crew.addr_no AND crew_cap=1 AND crew.crew_name=?";
+	       try {
+	           Connection con = Jdbc.get();
+	           
+	           String sql = "SELECT * FROM user, user_crew, crew, address WHERE user.user_no=user_crew.user_no AND user_crew.crew_no=crew.crew_no AND address.addr_no=crew.addr_no AND crew_cap=1 AND crew.crew_name=?";
 	            PreparedStatement pstmt = con.prepareStatement(sql);
 	            pstmt.setString(1, crewName);
 	            ResultSet rs = pstmt.executeQuery();
 
 
-		        if (rs.next()) {
-		            int crewNo = rs.getInt("crew_no");
-		            String crName = rs.getString("crew_name");
-		            String crewIntro = rs.getString("crew_intro");
-		            String addrName = rs.getString("addr_name");
-		            String userNick = rs.getString("user_nick");
-		            String userPhone = rs.getString("user_phone");
-		            JPanel infoPanel = new JPanel(new BorderLayout());
-		            infoPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
-		            
-		            DefaultTableModel detailModel = new DefaultTableModel();
-		            detailModel.addColumn(crName);
+	           if (rs.next()) {
+	               int crewNo = rs.getInt("crew_no");
+	               String crName = rs.getString("crew_name");
+	               String crewIntro = rs.getString("crew_intro");
+	               String addrName = rs.getString("addr_name");
+	               String userNick = rs.getString("user_nick");
+	               String userPhone = rs.getString("user_phone");
+	               JPanel infoPanel = new JPanel(new BorderLayout());
+	               infoPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
+	               
+	               DefaultTableModel detailModel = new DefaultTableModel();
+	               detailModel.addColumn(crName);
 
-		            detailModel.addRow(new Object[]{"크루 소개 : " + crewIntro});
-		            detailModel.addRow(new Object[]{"지역 : " + addrName});
-		            detailModel.addRow(new Object[]{"크루장 : " + userNick});
-		            detailModel.addRow(new Object[]{"크루장 번호 : " + userPhone});
-		            
-		            JButton joinButton = new JButton("가입하기");
-		            joinButton.setFont(new Font("Gong Gothic Light", Font.PLAIN, 17));
-		            joinButton.setPreferredSize(new Dimension(100, 30));
-		            joinButton.setBackground(Color.WHITE);
-		            // 이미 가입된 크루인지 확인
-		            if (isAlreadyJoined(con, crewNo, loggedInUserNo)) {
-		               // 이미 가입된 크루라면 메시지 표시 및 가입 버튼 비활성화
-		               detailModel.addRow(new Object[]{"상태 : 이미 가입된 크루입니다."});
-		               joinButton.setEnabled(false); // 가입 버튼 비활성화
-		            } else {
-		               // 가입되지 않은 크루라면 가입 버튼 활성화
-		              
-		               joinButton.addActionListener(new ActionListener() {
-		                  @Override
-		                   public void actionPerformed(ActionEvent e) {
-		                       try {
-		                    	   
-		                           // 가입하기 버튼이 클릭되었을 때 수행할 동작
-		                           String joinQuery = "CALL joinCrew(?, ?)";
-		                           PreparedStatement joinStatement = con.prepareStatement(joinQuery);
-		                           // 현재 로그인한 사용자의 user_no를 사용하고, 선택한 크루의 crew_no를 사용
-		                           joinStatement.setInt(1, loggedInUserNo); // CURRENT_USER_ID에 현재 사용자의 ID를 할당
-		                           joinStatement.setInt(2, crewNo);
-		                           
-		                           int rowsAffected = joinStatement.executeUpdate();
-		                           if (rowsAffected > 0) {
-		                               JOptionPane.showMessageDialog(frame, "크루에 가입되었습니다!");
-		                           }
-		                           joinStatement.close();
-		                       } catch (SQLException ex) {
-		                           ex.printStackTrace();
-		                           JOptionPane.showMessageDialog(frame, "가입 중 오류가 발생했습니다.");
-		                       }
-		                   }
-		               });
-		            }
+	               detailModel.addRow(new Object[]{"크루 소개 : " + crewIntro});
+	               detailModel.addRow(new Object[]{"지역 : " + addrName});
+	               detailModel.addRow(new Object[]{"크루장 : " + userNick});
+	               detailModel.addRow(new Object[]{"크루장 번호 : " + userPhone});
+	               
+	               JButton joinButton = new JButton("가입하기");
+	               joinButton.setFont(new Font("Gong Gothic Light", Font.PLAIN, 17));
+	               joinButton.setPreferredSize(new Dimension(100, 30));
+	               joinButton.setBackground(Color.WHITE);
+	               // 이미 가입된 크루인지 확인
+	               if (isAlreadyJoined(con, crewNo, loggedInUserNo)) {
+	                  // 이미 가입된 크루라면 메시지 표시 및 가입 버튼 비활성화
+	                  detailModel.addRow(new Object[]{"상태 : 이미 가입된 크루입니다."});
+	                  joinButton.setEnabled(false); // 가입 버튼 비활성화
+	               } else {
+	                  // 가입되지 않은 크루라면 가입 버튼 활성화
+	                 
+	                  joinButton.addActionListener(new ActionListener() {
+	                     @Override
+	                      public void actionPerformed(ActionEvent e) {
+	                          try {
+	                             
+	                              // 가입하기 버튼이 클릭되었을 때 수행할 동작
+	                              String joinQuery = "CALL joinCrew(?, ?)";
+	                              PreparedStatement joinStatement = con.prepareStatement(joinQuery);
+	                              // 현재 로그인한 사용자의 user_no를 사용하고, 선택한 크루의 crew_no를 사용
+	                              joinStatement.setInt(1, loggedInUserNo); // CURRENT_USER_ID에 현재 사용자의 ID를 할당
+	                              joinStatement.setInt(2, crewNo);
+	                              
+	                              int rowsAffected = joinStatement.executeUpdate();
+	                              if (rowsAffected > 0) {
+	                                  JOptionPane.showMessageDialog(frame, "크루에 가입되었습니다!");
+	                              }
+	                              joinStatement.close();
+	                          } catch (SQLException ex) {
+	                              ex.printStackTrace();
+	                              JOptionPane.showMessageDialog(frame, "가입 중 오류가 발생했습니다.");
+	                          }
+	                      }
+	                  });
+	               }
 
-		            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		            buttonPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
-		            buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // 위쪽과 아래쪽에 패딩 추가
-		            buttonPanel.add(joinButton); // 버튼을 패널에 추가
+	               JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	               buttonPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
+	               buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // 위쪽과 아래쪽에 패딩 추가
+	               buttonPanel.add(joinButton); // 버튼을 패널에 추가
 
-		            frame.add(buttonPanel, BorderLayout.SOUTH); // 버튼 패널을 프레임의 하단에 추가
-		            // 버튼 패널의 배경색을 흰색으로 설정
-		            buttonPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
-		            
-		            JTable detailTable = new JTable(detailModel);
-		            detailTable.setFont(new Font("Gong Gothic Light", Font.PLAIN, 20));
-		            detailTable.setRowHeight(30);
-		            detailTable.setShowGrid(false); // 테두리 없애기
+	               frame.add(buttonPanel, BorderLayout.SOUTH); // 버튼 패널을 프레임의 하단에 추가
+	               // 버튼 패널의 배경색을 흰색으로 설정
+	               buttonPanel.setBackground(Color.WHITE); // 배경색 흰색으로 설정
+	               
+	               JTable detailTable = new JTable(detailModel);
+	               detailTable.setFont(new Font("Gong Gothic Light", Font.PLAIN, 20));
+	               detailTable.setRowHeight(30);
+	               detailTable.setShowGrid(false); // 테두리 없애기
 
-		            TableCellRenderer headerRenderer = detailTable.getTableHeader().getDefaultRenderer();
-		            detailTable.getTableHeader().setFont(new Font("Gong Gothic Light", Font.PLAIN, 30));
-		            detailTable.getTableHeader().setBackground(Color.white);
-		            JScrollPane detailScrollPane = new JScrollPane(detailTable);
-		            detailScrollPane.setBorder(BorderFactory.createEmptyBorder());
-		            detailScrollPane.getViewport().setBackground(new Color(0, 0, 0, 0)); // 배경색 투명 설정
-		            infoPanel.add(detailScrollPane, BorderLayout.NORTH);
+	               TableCellRenderer headerRenderer = detailTable.getTableHeader().getDefaultRenderer();
+	               detailTable.getTableHeader().setFont(new Font("Gong Gothic Light", Font.PLAIN, 30));
+	               detailTable.getTableHeader().setBackground(Color.white);
+	               JScrollPane detailScrollPane = new JScrollPane(detailTable);
+	               detailScrollPane.setBorder(BorderFactory.createEmptyBorder());
+	               detailScrollPane.getViewport().setBackground(new Color(0, 0, 0, 0)); // 배경색 투명 설정
+	               infoPanel.add(detailScrollPane, BorderLayout.NORTH);
 
-		            detailsPanel.add(infoPanel, BorderLayout.CENTER);
-		        }
+	               detailsPanel.add(infoPanel, BorderLayout.CENTER);
+	           }
 
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
+	       } catch (Exception e) {
+	           e.printStackTrace();
+	       }
 
 	        frame.add(detailsPanel);
 	        frame.setVisible(true);
